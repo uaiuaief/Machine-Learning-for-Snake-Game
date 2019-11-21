@@ -31,7 +31,7 @@ class Controller:
     @staticmethod
     def load_genetic_data():
         try:
-            with open(r'C:\Users\Glaucio Nunes\PycharmProjects\Snake_AI\snake\genetic data.txt', 'r') as file:
+            with open(r'PATH TO\genetic data.txt', 'r') as file:
                 data = file.read()
 
                 if data != '':
@@ -61,7 +61,7 @@ class Controller:
     @staticmethod
     def load_generation():
         try:
-            with open(r'C:\Users\Glaucio Nunes\PycharmProjects\Snake_AI\snake\generation.txt', 'r') as file:
+            with open(r'PATH TO\generation.txt', 'r') as file:
                 data = file.read()
                 if data != '':
                     return int(data)
@@ -74,7 +74,7 @@ class Controller:
     @staticmethod
     def load_food_coord():
         try:
-            with open(r'C:\Users\Glaucio Nunes\PycharmProjects\Snake_AI\snake\food_coord.txt', 'r') as file:
+            with open(r'PATH TO\food_coord.txt', 'r') as file:
                 data = file.read()
 
                 if data != '':
