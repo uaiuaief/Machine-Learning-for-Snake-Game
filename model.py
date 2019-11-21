@@ -75,7 +75,7 @@ class PlotScreen(Screen):
     @staticmethod
     def get_plot_data():
         try:
-            with open(r'C:\Users\Glaucio Nunes\PycharmProjects\Snake_AI\snake\plotgraph.txt', 'r') as file:
+            with open(r'PATH TO\plotgraph.txt', 'r') as file:
                 data = file.read()
                 if data != '':
                     # CREATE GENERATION AXIS
@@ -845,7 +845,7 @@ class Population:
         # Save genetic data:
         if genetic_data != [[]] and genetic_data != []:
             try:
-                with open(r'C:\Users\Glaucio Nunes\PycharmProjects\Snake_AI\snake\genetic data.txt', 'w') as file:
+                with open(r'PATH TO\genetic data.txt', 'w') as file:
                     file.write(str(genetic_data))
             except FileNotFoundError:
                 pass
@@ -857,7 +857,7 @@ class Population:
         # Save generation number:
         if self.generation != '':
             try:
-                with open(r'C:\Users\Glaucio Nunes\PycharmProjects\Snake_AI\snake\generation.txt', 'w') as file:
+                with open(r'PATH TO\generation.txt', 'w') as file:
                     file.write(str(self.generation))
             except FileNotFoundError:
                 pass
@@ -865,7 +865,7 @@ class Population:
         # Save food coordinates:
         if fittest.food_position != '':
             try:
-                with open(r'C:\Users\Glaucio Nunes\PycharmProjects\Snake_AI\snake\food_coord.txt', 'w') as file:
+                with open(r'PATH TO\\food_coord.txt', 'w') as file:
                     file.write(str(fittest.food_position))
             except FileNotFoundError:
                 pass
@@ -873,7 +873,7 @@ class Population:
         # Save fittest fitness and generation number:
         if Population.plot_data != '':
             try:
-                with open(r'C:\Users\Glaucio Nunes\PycharmProjects\Snake_AI\snake\plotgraph.txt', 'a') as file:
+                with open(r'PATH TO\plotgraph.txt', 'a') as file:
                     to_write = Population.plot_data
                     file.write(str(to_write))
             except FileNotFoundError:
