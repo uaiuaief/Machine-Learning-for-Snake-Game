@@ -77,6 +77,7 @@ class PlotScreen(Screen):
     def get_plot_data():
         try:
             with open(os.path.join(os.getcwd(), 'plot_graph'), 'r') as file:
+
                 data = file.read()
                 if data != '':
                     # CREATE GENERATION AXIS
@@ -881,4 +882,3 @@ class Population:
                     file.write(str(to_write))
             except FileNotFoundError:
                 print('file not found')
-
