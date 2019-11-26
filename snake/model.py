@@ -144,7 +144,6 @@ class PlotScreen(Screen):
     def resize_plot_data():
         plot_data = PlotScreen.get_plot_data()
         x, y1, y2 = plot_data
-
         interval = len(x)//SnakeAPP.config['PLOT_X_AXIS_AMOUNT']
 
         if len(x) <= SnakeAPP.config['PLOT_X_AXIS_AMOUNT']:
@@ -882,3 +881,4 @@ class Population:
                     file.write(str(to_write))
             except FileNotFoundError:
                 print('file not found')
+

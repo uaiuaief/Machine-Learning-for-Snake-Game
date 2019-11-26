@@ -63,6 +63,7 @@ class Controller:
     def load_generation():
         try:
             with open(os.path.join(os.getcwd(), 'generation'), 'r') as file:
+
                 data = file.read()
                 if data != '':
                     return int(data)
@@ -102,8 +103,8 @@ class Controller:
                     raise ValueError('File data must be an array')
 
         except FileNotFoundError:
-            return None
             print("File Not Found")
+            return []
 
 
 
