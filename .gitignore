@@ -1,0 +1,4 @@
+venv/*
+utils.py
+.idea/*
+snake/__pycache__/*
