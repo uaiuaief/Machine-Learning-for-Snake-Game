@@ -1,3 +1,3 @@
-from snake.snake_main import SnakeAPP
+from snake.main import SnakeAPP
 
 app = SnakeAPP()

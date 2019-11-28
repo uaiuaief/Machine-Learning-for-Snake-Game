@@ -1,6 +1,6 @@
 import time
-from tkinter import *
-from snake import controller
+from tkinter import TclError
+from snake.controller import Controller, UserControl
 
 
 class View:
@@ -9,9 +9,9 @@ class View:
         self.ai_high_score = 0
         self.player_high_score = 0
         try:
-            self.controller = controller.Controller(load_population=True)
+            self.controller = Controller(load_population=True)
         except ValueError:
-            self.controller = controller.Controller()
+            self.controller = Controller()
 
         self.ui = self.controller.ui
         self.user_control = UserControl(self.ui)
@@ -217,62 +217,3 @@ class View:
             frame.unbind("<KeyPress-Right>")
 
 
-class UserControl:
-    def __init__(self, ui):
-        self.ui = ui
-        self.keys = {
-                    "U": False,
-                    "D": False,
-                    "L": False,
-                    "R": False
-                }
-
-    def up(self, event):
-        self.keys["U"] = True
-
-    def noup(self, event):
-        self.keys["U"] = False
-
-    def down(self, event):
-        self.keys["D"] = True
-
-    def nodown(self, event):
-        self.keys["D"] = False
-
-    def left(self, event):
-        self.keys["L"] = True
-
-    def noleft(self, event):
-        self.keys["L"] = False
-
-    def right(self, event):
-        self.keys["R"] = True
-
-    def noright(self, event):
-        self.keys["R"] = False
-
-    def no_others(self):
-        self.keys["U"] = False
-        self.keys["D"] = False
-        self.keys["L"] = False
-        self.keys["R"] = False
-
-    def move_snake(self):
-        if self.keys["U"]:
-            self.no_others()
-            self.ui.frame.after(40, self.ui.snake.up)
-            # snake.up()
-        if self.keys["D"]:
-            self.no_others()
-            self.ui.frame.after(40, self.ui.snake.down)
-            # snake.down()
-        if self.keys["L"]:
-            self.no_others()
-            self.ui.frame.after(40, self.ui.snake.left)
-            # snake.left()
-        if self.keys["R"]:
-            self.no_others()
-            self.ui.frame.after(40, self.ui.snake.right)
-            # snake.right()
-
-        self.ui.frame.after(16, self.move_snake)

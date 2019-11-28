@@ -1,6 +1,5 @@
 import random
-from tkinter import *
-# from snake.view import View
+from tkinter import mainloop, CENTER, NW
 
 
 class SnakeAPP:

@@ -1,18 +1,19 @@
 import os
 import re
-from snake import model
+from snake.AI import NeuralNetwork, Population
+from snake.interface import UI
 
 
 class Controller:
     def __init__(self, load_population=False):
-        self.ui = model.UI()
-        self.neural_network = model.NeuralNetwork(snake=self.ui.snake)
+        self.ui = UI()
+        self.neural_network = NeuralNetwork(snake=self.ui.snake)
 
         if load_population:
-            self.population = model.Population(snake=self.ui.snake, load=self.load_genetic_data())
+            self.population = Population(snake=self.ui.snake, load=self.load_genetic_data())
             self.population.generation = self.load_generation()
         else:
-            self.population = model.Population(snake=self.ui.snake)
+            self.population = Population(snake=self.ui.snake)
 
     def get_starting_screen(self):
         return self.ui.starting_screen
@@ -27,12 +28,12 @@ class Controller:
         return self.neural_network
 
     def load_fittest(self):
-        return model.NeuralNetwork(snake=self.ui.snake, hidden_layer_data=self.load_genetic_data())
+        return NeuralNetwork(snake=self.ui.snake, hidden_layer_data=self.load_genetic_data())
 
     @staticmethod
     def load_genetic_data():
         try:
-            with open(os.path.join(os.getcwd(), 'genetic_data'), 'r') as file:
+            with open(os.path.join(os.getcwd(), 'snake/data/genetic_data'), 'r') as file:
                 data = file.read()
 
                 if data != '':
@@ -62,7 +63,7 @@ class Controller:
     @staticmethod
     def load_generation():
         try:
-            with open(os.path.join(os.getcwd(), 'generation'), 'r') as file:
+            with open(os.path.join(os.getcwd(), 'snake/data/generation'), 'r') as file:
 
                 data = file.read()
                 if data != '':
@@ -77,7 +78,7 @@ class Controller:
     @staticmethod
     def load_food_coord():
         try:
-            with open(os.path.join(os.getcwd(), 'food_coord'), 'r') as file:
+            with open(os.path.join(os.getcwd(), 'snake/data/food_coord'), 'r') as file:
                 data = file.read()
 
                 if data != '':
@@ -107,6 +108,65 @@ class Controller:
             return []
 
 
+class UserControl:
+    def __init__(self, ui):
+        self.ui = ui
+        self.keys = {
+                    "U": False,
+                    "D": False,
+                    "L": False,
+                    "R": False
+                }
+
+    def up(self, event):
+        self.keys["U"] = True
+
+    def noup(self, event):
+        self.keys["U"] = False
+
+    def down(self, event):
+        self.keys["D"] = True
+
+    def nodown(self, event):
+        self.keys["D"] = False
+
+    def left(self, event):
+        self.keys["L"] = True
+
+    def noleft(self, event):
+        self.keys["L"] = False
+
+    def right(self, event):
+        self.keys["R"] = True
+
+    def noright(self, event):
+        self.keys["R"] = False
+
+    def no_others(self):
+        self.keys["U"] = False
+        self.keys["D"] = False
+        self.keys["L"] = False
+        self.keys["R"] = False
+
+    def move_snake(self):
+        if self.keys["U"]:
+            self.no_others()
+            self.ui.frame.after(40, self.ui.snake.up)
+            # snake.up()
+        if self.keys["D"]:
+            self.no_others()
+            self.ui.frame.after(40, self.ui.snake.down)
+            # snake.down()
+        if self.keys["L"]:
+            self.no_others()
+            self.ui.frame.after(40, self.ui.snake.left)
+            # snake.left()
+        if self.keys["R"]:
+            self.no_others()
+            self.ui.frame.after(40, self.ui.snake.right)
+            # snake.right()
+
+        self.ui.frame.after(16, self.move_snake)
 
 
 
